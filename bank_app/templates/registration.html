@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color: #f4f4f4;
+}
+.container {
+    background-color: #b2beb5;
+    max-width: 250px;
+    margin: auto;
+    border: 3px solid #73AD21;
+  }
+
+input[type=text], input[type=password], textarea {
+  width: 100%;
+  padding: 7px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+td{
+width:100%;
+}
+tr{
+  height:9px; 
+  }
+input[type=text]:focus, input[type=password]:focus {
+  background-color:f1f2f2;
+  outline: none;
+}
+ div {
+            padding: 2px 0;
+         }
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 2px;
+}
+.registerbtn {
+  background-color: #c4d8ee;
+  color: black;
+  padding: 10px 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity: 2;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+</style>
+</head>
+<body>
+<form  method="POST" >
+  {% csrf_token %} 
+  <div class="container">
+  <center>  <h2>User Registration</h2> </center>
+  <hr>
+<table class=center">
+  <tr>
+<td>
+        <input type="text" name="txtName" placeholder= "    Name" size="05" required /> 
+</td>
+</tr>
+<tr>
+<td>
+<input type="text" name="txtAcc" placeholder="     Account No" size="15" required /> </td>
+
+</tr>
+<tr>
+
+<td>
+<input type="text" name="txtphno" placeholder="     Phone no" size="15"required /> </td>
+</tr>
+<tr>
+
+<td> <input type="text" placeholder="     Email" name="txtemail" required> </td> </tr>
+
+<td>
+        <input type="text" name="txtatm" placeholder= "     ATM card no" size="05" required /> 
+</td>
+</tr>
+<tr>
+  <td>
+  <input type="password" name="txtpass1" placeholder="     Password" size="15" required /> <div id="pass"> </div></td>
+  </tr>
+  <tr>
+  <td>
+  <input type="password" text-align="center" name="txtpass2" placeholder="     confirm password     " size="15" required  /> </td>
+  </tr>
+  <tr> <td style="text-align:center" colspan="2">
+    <button type="submit" class="registerbtn" name="ok"><b>Submit</b></button>  </td>
+     </tr> </table> </from> 
+<script>
+  
+  var msg="{{msg}}";
+      if(msg!="")
+          alert(msg)
+  function myf() {
+    var x = "hai";
+    document.getElementById("demo").innerHTML = x;
+    }
+           
+ </script>
+</form>  
+
+</body>  
+</html>  

@@ -1,0 +1,328 @@
+
+  <!DOCTYPE html>
+  {% load static %}
+  <html lang="en">
+  
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>user page</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'bank_app/node_modules/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bank_app/css_2/style.css' %}">
+    <!-- endinject -->
+    <link rel="shortcut icon"  alt ="asdfghjertyuqwe" href="{% static 'bank_app/images_2/favicon.png' %}" />
+    <style>
+      body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      .bg-image {
+        /* The image used */
+        background-image: url("photographer.jpg");
+        
+        /* Add the blur effect */
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        
+        /* Full height */
+        height: 100%; 
+        
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      
+      /* Position text in the middle of the page/image */
+      .bg-text {
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+        color: white;
+        font-weight: bold;
+        border: 3px solid #f1f1f1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 80%;
+        padding: 20px;
+        text-align: center;
+      }
+      p.groove {border-style: groove;}
+      .p2{
+        font-family: Arial, Helvetica, sans-serif;
+        font-family: Verdana, sans-serif;
+        font-size: 16px;
+        color: gray; 
+      }
+      .p3{
+       
+        font-family: Verdana, sans-serif;
+        font-size: 20px;
+        color: rgb(49, 1, 1); 
+      }
+      .p4{
+       
+        font-family: Verdana, sans-serif;
+        font-size: 15px;
+        color: rgba(29, 27, 27, 0.384); 
+      }
+      
+    </style>
+  </head>
+  
+
+<body>
+  {% csrf_token %}
+  
+  <div class="body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <aside class="mdc-persistent-drawer mdc-persistent-drawer--open">
+      <nav class="mdc-persistent-drawer__drawer">
+        <div class="mdc-persistent-drawer__toolbar-spacer">
+          <a href="home.html" class="brand-logo">
+						<link rel="icon" href="{% static 'bank_app/assets/images/favicon.ico' %}">
+					</a>
+        </div>
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
+                <h5 style="color:blue;">Dashboard</h5>
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
+                <h5 style="color:blue;"> 
+               My Account</h5>
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+              <a class="mdc-drawer-link" href="#">
+                <h5 style="color:blue;">
+                Transfer</h5>
+                
+              </a>
+              <div class="mdc-expansion-panel" id="ui-sub-menu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
+                      <h5 style="color:blue;">
+                      Create Transfer</h5>
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/history_tran/">
+                      <h5 style="color:blue;">
+                      Transfer History</h5>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+              <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+                <a class="mdc-drawer-link" href="#">
+                  <h5 style="color:blue;">
+                  Bill payments</h5>
+                </a>
+              </div>
+            <!--
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="{% static 'bank_app/pages/ui-features/tables.html'%}">
+               <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
+               Tables
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="pages/charts/chartjs.html">
+               
+                Charts
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">
+              <a class="mdc-drawer-link" href="#">
+               
+                Sample Pages
+                <i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>
+              </a>
+              <div class="mdc-expansion-panel" id="sample-page-submenu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="pages/samples/blank-page.html">
+                      Blank Page
+                    </a>
+                  
+                  </div>
+                  
+
+                </nav>
+              </div> 
+            </div>-->
+            
+          </nav>
+        </div>
+      </nav>
+    </aside>
+    <!-- partial -->
+    <!-- partial:partials/_navbar.html -->
+    <header class="mdc-toolbar mdc-elevation--z4 mdc-toolbar--fixed">
+      <div class="mdc-toolbar__row">
+        
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="notification-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">notifications</i>
+              <span class="dropdown-count">3</span>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="notification-menu">
+              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">email</i>
+                  One unread message
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">group</i>
+                  One event coming up
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">cake</i>
+                  It's Aleena's birthday!
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon mdc-ripple-surface" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">widgets</i>
+            </a>
+          </div>
+          <div class="mdc-menu-anchor mr-1">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">Log out</i>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu">
+                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                   <!--<i class="material-icons mdc-theme--primary mr-1">settings</i>
+                    Settings
+                  </li>-->
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                    <a  href="http://127.0.0.1:8000/home/">
+                      Logout 
+                    </a>
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+    <!-- partial -->
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+      <main class="content-wrapper">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+              <div class="mdc-card">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-7">
+                    <section class="purchase__card_section">
+                      <p class="p4" >My Last login time is :{{date}}</p>
+                    </section>
+                  </div> 
+                </div>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-10">
+              <div class="mdc-layout-grid__inner"> 
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+                    <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                        <div class="mdc--tile mdc--tile rounded">
+                            <div class="bg-image">
+                                <div class="bg-text">
+                                 <h2>Blurred Background</h2>
+                                 <h1 style="font-size:50px">I am John Doe</h1>
+                                 <p>And I'm a Photographer</p>
+                                 <i class="mdi mdi-account-settings text-white icon-md"></i>
+                                 </div>
+                            </div>
+                            <div class="text">
+                                <img src="{% static 'bank_app/assets/images/transfer.jpg '%}" alt="logo">
+                                <h3 class="p3">Fund Transfer</h3>
+                                <p class="p2">Using Netbanking services you can transfer money to another account of the same bank or different bank.</p>
+                                <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
+                                     Create Transfer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+                        <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                            <div class="mdc--tile mdc--tile rounded">
+                                 <i class="mdi mdi-basket text-white icon-md"></i>
+                            </div>
+                            <div class="text-wrapper pl-1">
+                                <img src="{% static 'bank_app/assets/images/bill12.jpg '%}" alt="logo">
+                                <h3 class="p3">Pay Bill</h3>
+                                <p class="p2">Using Netbanking services you can pay bill.</p>
+                                <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
+                                    Pay bill
+                                </a>
+                        </div>
+                    </div>
+                
+                </div>   
+            </div>
+        </div>
+    </div>
+            
+    </div>
+    </div>
+    </main>
+      <!-- partial:partials/_footer.html -->
+      <footer>
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+              <span class="text-muted">Copyright © 2018 <a class="text-green" href="https://www.bootstrapdash.com/" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
+            </div>
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6 d-flex justify-content-end">
+              <span class="mt-0 text-right">Hand-crafted &amp; made with <i class="mdi mdi-heart text-red"></i></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+     <!-- partial -->
+    </div>
+  </div>
+  <!-- body wrapper -->
+  <!-- plugins:js -->
+  <script src="{% static 'bank_app/node_modules/material-components-web/dist/material-components-web.min.js' %}"></script>
+  <script src="{% static 'bank_app/node_modules/jquery/dist/jquery.min.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'bank_app/node_modules/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'bank_app/node_modules/progressbar.js/dist/progressbar.min.js' %}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'bank_app/js_2/misc.js'%}"></script>
+  <script src="{% static 'bank_app/js_2/material.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'bank_app/js_2/dashboard.js' %}"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

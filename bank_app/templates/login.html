@@ -1,0 +1,133 @@
+{% load static %}
+
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>login page</title>
+  <style type="text/css">
+  body {
+  background-color: #f4f4f4;
+  color: #775656;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.5em;
+  }
+  a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  h1 { font-size: 1em; }
+  h1, p {
+  margin-bottom: 10px;
+  }
+  strong {
+  font-weight: bold;
+  }
+  .uppercase { text-transform: uppercase; }
+  .imgcontainer {
+    text-align: center;
+    margin: 14px 0 12px 0;
+    position: relative;
+  }
+  
+  img.avatar {
+    width: 25%;
+    border-radius: 2%;
+  }
+  
+  /* ---------- LOGIN ---------- */
+  #login {
+  margin: 50px auto;
+  width: 300px;
+  }
+  form fieldset input[type="text"], input[type="password"] {
+  background-color: #e5e5e5;
+  border: none;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: #5a5656;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  height: 50px;
+  outline: none;
+  padding: 0px 10px;
+  width: 280px;
+  -webkit-appearance:none;
+  }
+  form fieldset input[type="submit"] {
+  background-color: #008dde;
+  border: none;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: #f4f4f4;
+  cursor: pointer;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  height: 50px;
+  text-transform: uppercase;
+  width: 300px;
+  -webkit-appearance:none;
+  }
+  form fieldset a {
+  color: #5a5656;
+  font-size: 13px;
+  }
+  form fieldset a:hover { text-decoration: underline; }
+  .animate {
+      -webkit-animation: animatezoom 0.6s;
+      animation: animatezoom 0.6s
+    }
+    
+  @-webkit-keyframes animatezoom {
+      from {-webkit-transform: scale(0)} 
+      to {-webkit-transform: scale(1)}
+    }
+      
+   @keyframes animatezoom {
+      from {transform: scale(0)} 
+      to {transform: scale(1)}
+    }
+    
+  </style>
+  </head>
+  <body>
+      
+  <div id="login">
+  
+  <form class="animate"  method="POST" >
+      {% csrf_token %} 
+      
+  <fieldset>
+    <div class="imgcontainer">
+      <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+      <img src="{% static 'bank_app/images/demo/logo.jpg' %}" alt="Avatar" class="avatar">
+    </div>-->
+  <p><input type="text"  value="Username"  name="textuser" required placeholder="Username" onBlur="if(this.value=='')this.value='Username'" onFocus="if(this.value=='Username')this.value='' "></p>
+  <p><input type="password" name= "textpass" required placeholder="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' "></p>
+  <p><input type="submit" value="Login" ></p>
+  <p></p><a href="http://127.0.0.1:8000/registration/">New Registration?</a></p>
+  <p><a href="#">Forgot Password?</a></p>
+  </fieldset>
+  </form>
+  </div> <!-- end login -->
+  <script>
+    var msg="{{msg}}";
+    if(msg!="")
+        alert(msg)
+  </script>
+</body>
+  </html>

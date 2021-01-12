@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>user page</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'bank_app/node_modules/mdi/css/materialdesignicons.min.css' %}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'bank_app/css_2/style.css' %}">
+  <!-- endinject -->
+  <link rel="icon" href="{% static 'bank_app/assets/images/favicon.ico' %}">
+  <style>
+    * {
+      box-sizing:border-box;
+      
+    }
+    
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    t,th {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    td {
+      width: 30%
+    }
+    tr {
+      height: 14px
+    }
+    button {
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+    }
+    
+    img {
+      display: block;
+      height: auto;
+      max-width: 100%;
+    }
+    .center {
+        margin: auto;
+        width: 65%;
+        padding: 10px;
+      }
+    figure{
+        
+        width:800px;
+        height:1500px;
+        border-radius:4px;
+        border:2px solid #ccc;
+        position:relative;
+        padding:48px 10px 10px
+    }
+    hi {
+      border-style: dotted;
+    }
+    figure:before {
+        content: attr(data-title);
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-indent: 10px;
+        border-bottom: 2px solid #ccc;
+    }
+    select 
+        {
+          width: 180px;
+          height: 25px;
+          margin: 01px;
+        }
+    </style>
+    </head>
+
+<body>
+  
+  {% csrf_token %} 
+  <div class="body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <aside class="mdc-persistent-drawer mdc-persistent-drawer--open">
+      <nav class="mdc-persistent-drawer__drawer">
+        <div class="mdc-persistent-drawer__toolbar-spacer">
+          <a href="http://127.0.0.1:8000/user_view/" class="brand-logo"></a>	
+        </div>
+        <div class="mdc-persistent-drawer__toolbar-spacer">
+          <a href="#" class="brand-logo"></a>
+        </div>
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+              <p class="groove">{{email}}</p>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
+                <h5 style="color:blue;"><b>Dashboard</b></h5>
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
+                <h5 style="color:blue;"> 
+               My Account</h5>
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+              <a class="mdc-drawer-link" href="#">
+                <h5 style="color:blue;">
+                Transfer
+              </h5>
+              </a>
+              <div class="mdc-expansion-panel" id="ui-sub-menu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
+                      <h5 style="color:blue;">
+                      Create Transfer</h5>
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/history_tran/">
+                      <h5 style="color:blue;">
+                      Transfer History</h5>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+              <a class="mdc-drawer-link" href="#"><h5 style="color:blue;">
+                Bill payments</h5>
+              </a>
+            </div>
+            <!--<div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="{% static 'bank_app/pages/ui-features/tables.html' %}">
+                tables
+              </a>
+            </div>
+            <div class="mdc-expansion-panel" id="sample-page-submenu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/blank_page/">
+                      Blank Page
+                    </a>
+                  </div>
+                </nav>
+              </div>-->
+            </div>
+          </nav>
+        </div>
+      </nav>
+    </aside>
+    <!-- partial -->
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+      <main class="content-wrapper">
+        <div class="mdc-layout-grid">
+          <body>
+            <form  method="POST" >
+              {% csrf_token %} 
+              <script>
+                var msg="{{msg}}";
+                if(msg!="")
+                    alert(msg)
+                
+              </script>
+              <div class="center">
+              <figure data-title="TRANSACTION HISTORY">
+                <table>
+                <figcaption><tr>
+                 <td> <b>Transaction History</b> </td><td> From</td><td> To </td><td> Type </td></tr> 
+                 <tr></tr>
+                 <tr><td></td><td><input type="date"  name="fdate" ></td><td><input type="date"  name="todate" ></td>      
+                  <td>
+                    <select id="type" name="type"  >
+                      <option value="none" >-SELECT-</option>
+                      <option value="Fund Transfer" >Fund Transfer</option>
+                      <option value="Deposit">Deposit</option>
+                      <option value="All">All</option> 
+                    </select>
+                  </td>
+                </tr> 
+                <tr>
+                  <tr></tr>
+                </tr>
+                
+                <tr><td></td><td></td><td></td><td><button name="submit"> submit</button></td></tr>
+              </table>
+              <table style="width:100%">
+                
+                
+                </td>
+                {% if  dict %} 
+                <tr><th>{{type}} Time</th><th>{{type}} Amount</th><th>{{type}} Id</th></tr> 
+                <tr><td>
+                  {% for val in dict %} 
+                <tr style="width:50%">
+                  
+                  <td>{{ val.0 }}</td>
+                   <td>{{ val.1 }}</td>
+                  <td> {{ val.2 }}</td>
+                  
+                </tr>
+              
+                {% endfor %}
+                <tr><td></td><td></td><td></td><td><button name="download"> DOWNLOAD</button></td></tr>
+              
+                {% endif %}
+                {% if  result %} 
+                
+                {{result}}
+                
+                {% endif %}
+
+                <!--- Alllll
+                
+                                             
+                -->
+                {% if  all %}
+                <tr><th> Time</th><th> Amount</th><th>Id</th><th>Type</th></tr> 
+                <tr><td>
+                  {% for val in all %} 
+                <tr style="width:50%">
+                  
+                  <td>{{ val.0 }}</td>
+                   <td>{{ val.1 }}</td>
+                   <td> {{ val.2 }}</td>
+                   <td> {{ val.3 }}</td>
+                </tr>
+                {% endfor %}
+                <tr><td></td><td></td><td></td><td><button name="download"> DOWNLOAD</button></td></tr>
+                {% endif %}
+               
+                </figcaption>
+             </table>
+             </figure>
+            </div>
+           </form>   
+        </div>
+      </div> 
+      <!-- partial:partials/_navbar.html -->
+      <header class="mdc-toolbar mdc-elevation--z4 mdc-toolbar--fixed">
+        <div class="mdc-toolbar__row">
+          <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+            <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
+            <span class="mdc-toolbar__input">
+              <div class="mdc-text-field">
+                <!--<p class="groove">{{email}}</p>-->
+              </div>
+            </span>
+          </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="notification-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">notifications</i>
+              <span class="dropdown-count">3</span>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="notification-menu">
+              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">email</i>
+                  One unread message
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">group</i>
+                  One event coming up
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">cake</i>
+                  It's Aleena's birthday!
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon mdc-ripple-surface" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">widgets</i>
+            </a>
+          </div>
+          <div class="mdc-menu-anchor mr-1">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">Log out</i>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu">
+                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                   <!--<i class="material-icons mdc-theme--primary mr-1">settings</i>
+                    Settings
+                  </li>-->
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                    <a  href="http://127.0.0.1:8000/home/">
+                      Logout 
+                    </a>
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+    
+      
+     
+      <!-- partial -->
+    </div>
+  </div>
+  <!-- body wrapper -->
+  <!-- plugins:js -->
+  <script src="{% static 'bank_app/node_modules/material-components-web/dist/material-components-web.min.js' %}"></script>
+  <script src="{% static 'bank_app/node_modules/jquery/dist/jquery.min.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'bank_app/node_modules/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'bank_app/node_modules/progressbar.js/dist/progressbar.min.js' %}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'bank_app/js_2/misc.js'%}"></script>
+  <script src="{% static 'bank_app/js_2/material.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'bank_app/js_2/dashboard.js' %}"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

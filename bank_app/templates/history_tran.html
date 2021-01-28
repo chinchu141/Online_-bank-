@@ -105,45 +105,49 @@
             <div class="mdc-list-item mdc-drawer-item">
               <p class="groove">{{email}}</p>
             </div>
-            <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
-                <h5 style="color:blue;"><b>Dashboard</b></h5>
-              </a>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
-                <h5 style="color:blue;"> 
-               My Account</h5>
-              </a>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
-              <a class="mdc-drawer-link" href="#">
-                <h5 style="color:blue;">
-                Transfer
-              </h5>
-              </a>
-              <div class="mdc-expansion-panel" id="ui-sub-menu">
-                <nav class="mdc-list mdc-drawer-submenu">
-                  <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
-                      <h5 style="color:blue;">
-                      Create Transfer</h5>
-                    </a>
-                  </div>
+            <div class="mdc-list-group">
+              <nav class="mdc-list mdc-drawer-menu">
+                <div class="mdc-list-item mdc-drawer-item">
+                  <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
+                    <h5 style="color:blue;">Dashboard</h5>
+                  </a>
+                </div>
+                <div class="mdc-list-item mdc-drawer-item">
+                  <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
+                    <h5 style="color:blue;"> 
+                   My Account</h5>
+                  </a>
+                </div>
+                <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+                  <a class="mdc-drawer-link" href="#">
+                    <h5 style="color:blue;">
+                    Transfer</h5>
+                    
+                  </a>
+                  <div class="mdc-expansion-panel" id="ui-sub-menu">
+                    <nav class="mdc-list mdc-drawer-submenu">
+                      <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
+                          <h5 style="color:blue;">
+                          Create Transfer</h5>
+                        </a>
+                      </div>
+                    
+                      <div class="mdc-list-item mdc-drawer-item">
+                      <a class="mdc-drawer-link"href="http://127.0.0.1:8000/bill_pay/">
+                        <h5 style="color:blue;">
+                        Bill payments</h5>
+                      </a>
+                    </div>
+                   
+                  </nav>
+                  </div></div>
                   <div class="mdc-list-item mdc-drawer-item">
                     <a class="mdc-drawer-link" href="http://127.0.0.1:8000/history_tran/">
                       <h5 style="color:blue;">
-                      Transfer History</h5>
+                      Mini Statement</h5>
                     </a>
                   </div>
-                </nav>
-              </div>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
-              <a class="mdc-drawer-link" href="#"><h5 style="color:blue;">
-                Bill payments</h5>
-              </a>
-            </div>
             <!--<div class="mdc-list-item mdc-drawer-item">
               <a class="mdc-drawer-link" href="{% static 'bank_app/pages/ui-features/tables.html' %}">
                 tables
@@ -176,7 +180,7 @@
                     alert(msg)
                 
               </script>
-              <div class="center">
+              <div >
               <figure data-title="TRANSACTION HISTORY">
                 <table>
                 <figcaption><tr>
@@ -201,23 +205,23 @@
               <table style="width:100%">
                 
                 
-                </td>
-                {% if  dict %} 
-                <tr><th>{{type}} Time</th><th>{{type}} Amount</th><th>{{type}} Id</th></tr> 
-                <tr><td>
-                  {% for val in dict %} 
-                <tr style="width:50%">
-                  
-                  <td>{{ val.0 }}</td>
-                   <td>{{ val.1 }}</td>
-                  <td> {{ val.2 }}</td>
-                  
-                </tr>
-              
-                {% endfor %}
-                <tr><td></td><td></td><td></td><td><button name="download"> DOWNLOAD</button></td></tr>
-              
-                {% endif %}
+              </td>
+              {% if  dict %} 
+              <tr><th>{{type}} Time</th><th>{{type}} Amount</th><th>{{type}} Id</th></tr> 
+              <tr><td>
+                {% for val in dict %} 
+              <tr style="width:50%">
+                
+                <td>{{ val.0 }}</td>
+                 <td>{{ val.1 }}</td>
+                <td> {{ val.2 }}</td>
+                
+              </tr>
+            
+              {% endfor %}
+              <tr><td></td><td></td><td></td><td><button name="download"> DOWNLOAD</button></td></tr>
+            
+              {% endif %}
                 {% if  result %} 
                 
                 {{result}}
@@ -237,7 +241,18 @@
                   <td>{{ val.0 }}</td>
                    <td>{{ val.1 }}</td>
                    <td> {{ val.2 }}</td>
-                   <td> {{ val.3 }}</td>
+                   
+                   <td> Fund transfer</td>
+                </tr>
+                {% endfor %}
+                {% for val in a %} 
+                <tr style="width:50%">
+                  
+                  <td>{{ val.0 }}</td>
+                   <td>{{ val.1 }}</td>
+                   <td> {{ val.2 }}</td>
+                   
+                   <td> Deposit</td>
                 </tr>
                 {% endfor %}
                 <tr><td></td><td></td><td></td><td><button name="download"> DOWNLOAD</button></td></tr>
@@ -261,7 +276,7 @@
               </div>
             </span>
           </section>
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+        <!--<section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
           <div class="mdc-menu-anchor">
             <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="notification-menu" data-mdc-auto-init="MDCRipple">
               <i class="material-icons">notifications</i>
@@ -288,7 +303,7 @@
             <a href="#" class="mdc-toolbar__icon mdc-ripple-surface" data-mdc-auto-init="MDCRipple">
               <i class="material-icons">widgets</i>
             </a>
-          </div>
+          </div>-->
           <div class="mdc-menu-anchor mr-1">
             <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
               <i class="material-icons">Log out</i>

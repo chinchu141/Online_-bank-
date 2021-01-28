@@ -62,46 +62,51 @@
         <div class="mdc-list-group">
           <nav class="mdc-list mdc-drawer-menu">
             <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
-                <h5 style="color:blue;"> Dashboard</h5>
-              </a>
+              <p class="groove">{{email}}</p>
             </div>
-            <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
-                <h5 style="color:blue;">
-                My Account</h5>
-              </a>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
-              <a class="mdc-drawer-link" href="#">
-                <h5 style="color:blue;">
-                Transfer
-                </h5>
-              </a>
-              <div class="mdc-expansion-panel" id="ui-sub-menu">
-                <nav class="mdc-list mdc-drawer-submenu">
-                  <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
-                      <h5 style="color:blue;">
-                      Create Transfer
-                      </h5>
-                    </a>
-                  </div>
+            <div class="mdc-list-group">
+              <nav class="mdc-list mdc-drawer-menu">
+                <div class="mdc-list-item mdc-drawer-item">
+                  <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
+                    <h5 style="color:blue;">Dashboard</h5>
+                  </a>
+                </div>
+                <div class="mdc-list-item mdc-drawer-item">
+                  <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
+                    <h5 style="color:blue;"> 
+                   My Account</h5>
+                  </a>
+                </div>
+                <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+                  <a class="mdc-drawer-link" href="#">
+                    <h5 style="color:blue;">
+                    Transfer</h5>
+                    
+                  </a>
+                  <div class="mdc-expansion-panel" id="ui-sub-menu">
+                    <nav class="mdc-list mdc-drawer-submenu">
+                      <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
+                          <h5 style="color:blue;">
+                          Create Transfer</h5>
+                        </a>
+                      </div>
+                    
+                      <div class="mdc-list-item mdc-drawer-item">
+                      <a class="mdc-drawer-link"href="http://127.0.0.1:8000/bill_pay/">
+                        <h5 style="color:blue;">
+                        Bill payments</h5>
+                      </a>
+                    </div>
+                   
+                  </nav>
+                  </div></div>
                   <div class="mdc-list-item mdc-drawer-item">
                     <a class="mdc-drawer-link" href="http://127.0.0.1:8000/history_tran/">
                       <h5 style="color:blue;">
-                      Transfer History</h5>
+                      Mini Statement</h5>
                     </a>
-                  </div>
-                </nav>
-              </div>
-            </div>
-              <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
-                <a class="mdc-drawer-link" href="#"><h5 style="color:blue;">
-                  Bill payments</h5>
-                </a>
-              </div>
-            <!--
+                  </div>  <!--
             <div class="mdc-list-item mdc-drawer-item">
               <a class="mdc-drawer-link" href="{% static 'bank_app/pages/ui-features/tables.html'%}">
                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
@@ -196,6 +201,8 @@
       </div>
     </header>
     <!-- partial -->
+    <form method="POST">
+      {% csrf_token %}
     <div class="page-wrapper mdc-toolbar-fixed-adjust">
       <main class="content-wrapper">
         <div class="mdc-layout-grid">
@@ -224,6 +231,7 @@
                     </div>
                   </div>
                 </div>-->
+                
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
                   <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
@@ -231,10 +239,57 @@
                         <div class="mdc--tile mdc--tile rounded">
                           <i class="mdi mdi-account-settings text-white icon-md"></i>
                         </div>
+                        
                         <div class="text">
                           <img src="{% static 'admin/img/gas.jpg '%}" alt="user" height="20%">
-                         <br> <button type="submit" class="registerbtn" name="submit">Book a cylinder</h4>
+                         <br> <button type="submit" class="registerbtn" name="book">Book a cylinder</h4>
                           </button>
+
+
+
+                          {% if  res %}
+                              
+                          <!--<div class="container">-->
+                          
+                        <table class="center">
+                          <tr>
+                            <td>
+                              <tr><td>
+                                <label for="txtdis "> Distributer Id : </label></td>
+                                <td>
+                                <input type="text" name="txtdistri" size="15" required /> </td>
+                                </tr><tr></tr><tr></tr>
+                                <tr><td>
+                                  <label for="txton "> Consumer Id : </label></td>
+                                  <td>
+                                  <input type="text" name="txtcons" size="15" required /> </td>
+                                  </tr>
+                                <tr><td></td><td>
+                              <input type="submit" name="ok"></td></tr>
+
+                              <center>  <h2>bill payment</h2> </center>
+                              <hr>{% endif %}
+                                </table>
+                                    {% if re %}
+                                    <div class="xx">
+                                      <table>
+                                    {% for val in re %}
+                                     {{ val }}<br>
+                                     {% endfor %}
+                                     <tr><td></td><td>
+                                      <button type="submit"  name="book_now"  > BOOK NOW</button> </td>
+                                    <td><button type="submit"  name="back"  > CANCEL</button>  </td></tr>
+                                    
+                                  
+                                    
+                                  </table>
+                                    </div>
+                             
+                
+                </div> 
+                {% endif %}
+                </form>   
+                
                         </div>
                         
                       </div>

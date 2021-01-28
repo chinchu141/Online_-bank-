@@ -1,3 +1,38 @@
+{% with a=val.0 %}
+{% if  res %}
+{% for val in res %} 
+
+<!--<tr style="width:50%">-->
+<div class="xx">
+ {{ val.1 }}<br>
+ {{ val.2 }}<br>
+ {{ val.3 }}<br>
+ {{ val.4 }}<br>
+ {{ val.5 }} 
+<button name="book"  onclick="booknow()"> BOOK NOW</button> 
+
+
+</div>
+
+{% endwith %}
+{% endfor %}
+
+</tr>
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 

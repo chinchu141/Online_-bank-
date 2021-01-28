@@ -50,6 +50,15 @@
       border: none;
       background: #dfdbdb;
     }
+    .xx
+    {
+      background-color: aliceblue;
+      width: 400px ;
+      border: 2px solid rgb(17,18,19);
+      padding: 30px;
+      margin-top: 100px;
+      margin-left: 0px;
+    }
     td
     {
       width:50%;
@@ -119,45 +128,49 @@
             <div class="mdc-list-item mdc-drawer-item">
               <p class="groove">{{email}}</p>
             </div>
-            <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
-                <h5 style="color:blue;"><b>Dashboard</b></h5>
-              </a>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item">
-              <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
-                <h5 style="color:blue;"> 
-               My Account</h5>
-              </a>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
-              <a class="mdc-drawer-link" href="#">
-                <h5 style="color:blue;">
-                Transfer
-              </h5>
-              </a>
-              <div class="mdc-expansion-panel" id="ui-sub-menu">
-                <nav class="mdc-list mdc-drawer-submenu">
-                  <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
-                      <h5 style="color:blue;">
-                      Create Transfer</h5>
-                    </a>
-                  </div>
+            <div class="mdc-list-group">
+              <nav class="mdc-list mdc-drawer-menu">
+                <div class="mdc-list-item mdc-drawer-item">
+                  <a class="mdc-drawer-link" href="http://127.0.0.1:8000/dashboard/">
+                    <h5 style="color:blue;">Dashboard</h5>
+                  </a>
+                </div>
+                <div class="mdc-list-item mdc-drawer-item">
+                  <a class="mdc-drawer-link" href="http://127.0.0.1:8000/user_view/">
+                    <h5 style="color:blue;"> 
+                   My Account</h5>
+                  </a>
+                </div>
+                <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+                  <a class="mdc-drawer-link" href="#">
+                    <h5 style="color:blue;">
+                    Transfer</h5>
+                    
+                  </a>
+                  <div class="mdc-expansion-panel" id="ui-sub-menu">
+                    <nav class="mdc-list mdc-drawer-submenu">
+                      <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="http://127.0.0.1:8000/transaction/">
+                          <h5 style="color:blue;">
+                          Create Transfer</h5>
+                        </a>
+                      </div>
+                    
+                      <div class="mdc-list-item mdc-drawer-item">
+                      <a class="mdc-drawer-link"href="http://127.0.0.1:8000/bill_pay/">
+                        <h5 style="color:blue;">
+                        Bill payments</h5>
+                      </a>
+                    </div>
+                   
+                  </nav>
+                  </div></div>
                   <div class="mdc-list-item mdc-drawer-item">
                     <a class="mdc-drawer-link" href="http://127.0.0.1:8000/history_tran/">
                       <h5 style="color:blue;">
-                      Transfer History</h5>
+                      Mini Statement</h5>
                     </a>
                   </div>
-                </nav>
-              </div>
-            </div>
-            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
-              <a class="mdc-drawer-link" href="#"><h5 style="color:blue;">
-                Bill payments</h5>
-              </a>
-            </div>
             <!--<div class="mdc-list-item mdc-drawer-item">
               <a class="mdc-drawer-link" href="{% static 'bank_app/pages/ui-features/tables.html' %}">
                 tables
@@ -189,38 +202,58 @@
                     alert(msg)
                   
               </script>
-              
+              <form method="POST">
+                {% csrf_token %}
+                  
               <div class="container">
-              <center>  <h2>transaction</h2> </center>
+              <center>  <h2>bill payment</h2> </center>
               <hr>
-            <table class="center">
-              <tr>
-                <td>
-                <form method="POST" onclick="history.go(-1);">
-                  {% csrf_token %}
-                  <label for="District">District  : </label></td>
-                  <td>
-                    <select name="dis" id="dist" onchange='this.form.submit()'    >
+            
+                    {% if re %}
+                    <div class="xx">
+                      <table>
+                    {% for val in re %}
+                     {{ val }}<br>
+                     {% endfor %}
+                     <tr><td></td><td>
+                      <button type="submit"  name="book_now"  > BOOK NOW</button> </td>
+                    <td><button type="submit"  name="back"  > CANCEL</button>  </td></tr>
                     
-                    {% for item in dis %}
-                    <option value="{{ item.0 }}{% if loop.first %} SELECTED{% endif %}">{{item.0}}</option>
+                  
+                    {% endif %}
+                  </table>
+                    </div>
+                 
+                    
+                    
+                    
+                 
+    
+    </div> 
+    </form>   
+                
+                  <!--<label for="District">District  : </label></td>
+                  <td>
+                    <select name="dis" id="dist"    >
+                      <option disabled selected="true">----select----</option>
+                      {% for item in dis %}
+                    <option value="{{ item.0 }}">{{item.0}}</option>
                     {% endfor %}
                   </select>
-                  <noscript><input type="submit" name="submit"></noscript>
                   
-                </td></tr><tr><td>
                   
-                    <label for="Gas ">Gas type : </label></td><td>
-                    <select name="gas" id="gas"  onchange='this.form.submit()' onfocus="this.selectedIndex = -1;">
+                </td></tr><br><tr><td>
+                  onchange='this.form.submit()'
+                  <label for="Gas ">Gas type : </label></td><td>
+                    <select name="gas" id="gas"  onfocus="this.selectedIndex = -1;">
+                      <option disabled selected="true">----select----</option>
                       {% for g in gas %}
                       <option value="{{ g.0}}">{{g.0}}</option>
                       {% endfor %}
-                    </select>
-                   <input type="submit" name="ok"></noscript>
-                    </form></td></tr>
+                    </select></td></tr><br>-->
+                    
+                   
       
-      
-      </table> 
       </div> 
       </form>   
       
@@ -310,6 +343,7 @@
 
 
     </script>
+    
   <!-- body wrapper -->
   <!-- plugins:js -->
   <script src="{% static 'bank_app/node_modules/material-components-web/dist/material-components-web.min.js' %}"></script>

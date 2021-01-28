@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect,HttpResponse,request
+from django.http import HttpResponseRedirect,HttpResponse,request,JsonResponse
 import pymysql,hashlib,os, binascii,re
 import json,smtplib
 from datetime import datetime,date
@@ -68,6 +68,7 @@ def login(request):
                     msg=("incorrect password") 
             else:
                 msg=("user doesnt exist")
+        context['msg']=msg  
         return render(request, 'login.html',context)
     context['msg']=msg  
     return render(request, 'login.html',context)
@@ -277,28 +278,40 @@ def transaction(request):
         t_amount=request.POST.get("txtamt")
         sender_accno=request.POST.get("txtsnano")
         amount=float(t_amount)
-        print(amount,bal)
-        if (bal-100 <= amount):
-            msg="No Sufficient balance"
+        if amount >= 10000:
+            msg="Amount should be less than 10000"
             context['msg']=msg
             return render(request, 'transaction.html',context)
         else:
-            amount=bal-amount
-            print(amount)
-            t="update bankdb set Balance=%s where Email='"+str(email)+"'"
-            val=float(amount)
-            print(val)
-            s="insert into transaction_tb(Receiver_bank,Receiver_name,Receiver_accno,tran_Amount,sender_accno,Date) values('"+str(bank_name)+"','"+str(rece_name)+"','"+str(rece_accno)+"','"+str(t_amount)+"','"+str(sender_accno)+"','"+str(today)+"');"
-            c.execute(t,val)
-            c.execute(s)
-            db.commit() 
-            msg="success transaction"   
-            subject = 'Debit Alert From MICRO BANK'
-            message = ''' Dear Customer,This is to inform you that %s INR was debited from your MICRO BANK
-            Thank you'''
-            send_mail(subject, message, EMAIL_HOST_USER, [email], fail_silently = False)
+            if bank_name=="MICRO BANK":
+                sv=(amount*0.25)/100
+            else:
+                sv=(amount*0.50)/100
 
-            context['msg']=msg
+            if (bal-(100 + sv) <= amount):
+                msg="No Sufficient balance"
+                context['msg']=msg
+                return render(request, 'transaction.html',context)
+            else:
+                bamount=bal- (amount + sv)
+                print(bamount) 
+                t="update bankdb set Balance=%s where Email='"+str(email)+"'"
+                val=float(bamount)
+            
+                s="insert into transaction_tb(Receiver_bank,Receiver_name,Receiver_accno,tran_Amount,sender_accno,Date) values('"+str(bank_name)+"','"+str(rece_name)+"','"+str(rece_accno)+"','"+str(t_amount)+"','"+str(sender_accno)+"','"+str(today)+"');"
+                c.execute(t,val)
+                c.execute(s)
+                db.commit() 
+                msg="success transaction"   
+                subject = 'Debit Alert From MICRO BANK'
+                message = ''' Dear Customer,This is to inform you that %s INR was debited from your MICRO BANK
+                Thank you'''
+                send_mail(subject, message, EMAIL_HOST_USER, [email], fail_silently = False)
+                context['msg']=msg
+                return render(request, 'transaction.html',context)   
+            #context['msg']=msg
+            return render(request, 'transaction.html',context)
+            
         #else:
             #msg="amount should be less than 25000"
     return render(request, 'transaction.html',context)
@@ -433,6 +446,7 @@ def update(request):
     
     if 'update' in request.POST:
         bal = request.POST.get('txtblns')
+
         d = decimal.Decimal(bal)
         now = datetime.now() 
         e=now.strftime("%Y-%m-%d %H:%M")
@@ -457,18 +471,55 @@ def contact(request):
 
 #-------------------------------
 
+
+
+
+#-----------------------------
+def bill_pay(request):
+    email = list(context.values())[1]
+    if 'book' in request.POST:
+        res="hi"
+        return render(request,'bill_pay.html',{'res':res})
+    if 'ok'  in request.POST:
+        d_id = request.POST.get('txtdistri')
+        u_id = request.POST.get('txtcons')
+        st="select Agency_id,Name,Phno,Cost from gas_agency where  Agency_id='"+str(d_id)+"'"
+        c.execute(st)
+        res=c.fetchone()
+        print(res)
+        return render(request,'bill_pay.html',{'re':res})
+    if 'book_now'  in request.POST:
+        amt=res[3]
+        t="insert into bill_pay(Acc_no,Amount,Bill_type,Date,cons_nbr,dist_no) values ('"+str(a)+"','"+str(b)+"','"+str(a)+"','"+e+"','"+str(s)+"','"+str(sku)+"');"
+        c.execute(t)
+        db.commit()
+        return render(request,'bill_pay.html',{'res':res})
+    if 'back'  in request.POST:
+        msg="booking bhe"
+        return render(request,'dashboard.html',{'msg':msg})
+    return render(request, 'bill_pay.html',context)
+
+
+
+#------------------------------
+
 def book_gas(request):
-    s="select distinct(District) from gas_agency "
-    c.execute(s)
-    dis=c.fetchall()    
-    if 'submit' in request.POST:
-        v=request.POST.get("dis")
-        print(v)
-        s="select distinct(District) from gas_agency "
-        c.execute(s)
-        gas=c.fetchall()
-        print(gas)
-        return render(request,'book_gas.html',{'gas':gas})
-    return render(request,'book_gas.html',{'dis':dis})
+   
+    now = datetime.now() 
+    e=now.strftime("%Y-%m-%d %H:%M")
+    
+    sku = request.GET.get('sku')
+    s = request.GET.get('s')
+    st="select Agency_id,Name,Phno,Cost from gas_agency where  Agency_id='"+str(sku)+"'"
+    c.execute(st)
+    res=c.fetchone()
+
+      
+    
+    return render(request,'book_gas.html',{'res':res})
+
+
+
+
 
     
